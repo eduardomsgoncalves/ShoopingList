@@ -2,10 +2,12 @@
 
 one:
   product: MyString
-  quantity: 2019-06-18
+  quantity: 1
   bought: false
+  user_id: 
 
 two:
   product: MyString
-  quantity: 2019-06-18
+  quantity: 1
   bought: false
+  user_id: 

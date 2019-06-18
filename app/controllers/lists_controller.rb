@@ -4,7 +4,7 @@ class ListsController < ApplicationController
   # GET /lists
   # GET /lists.json
   def index
-    @lists = List.all
+    @contacts = Contact.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /lists/1
