@@ -12,6 +12,7 @@ gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'devise-bootstrap-views', '~> 1.1'
 gem 'will_paginate', '~> 3.1', '>= 3.1.7'
 gem 'will_paginate-bootstrap', git: 'https://github.com/benitkibabu/will_paginate-bootstrap'
+gem 'cancancan', '~> 3.0', '>= 3.0.1'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
