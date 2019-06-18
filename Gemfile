@@ -6,6 +6,7 @@ gem 'rails', '4.2.11.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3.13'
 gem 'mini_racer', '~> 0.2.6'
+gem 'bootstrap', '~> 4.3.1'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
