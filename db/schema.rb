@@ -11,11 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190618032037) do
+ActiveRecord::Schema.define(version: 20190618234823) do
+
+  create_table "items", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "items", ["user_id"], name: "index_items_on_user_id"
+
+  create_table "list_has_items", force: :cascade do |t|
+    t.integer  "quantity"
+    t.boolean  "bought"
+    t.integer  "list_id"
+    t.integer  "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "list_has_items", ["item_id"], name: "index_list_has_items_on_item_id"
+  add_index "list_has_items", ["list_id"], name: "index_list_has_items_on_list_id"
 
   create_table "lists", force: :cascade do |t|
-    t.string   "product"
-    t.integer  "quantity"
+    t.string   "list"
+    t.date     "date"
     t.boolean  "bought"
     t.integer  "user_id"
     t.datetime "created_at", null: false
@@ -32,7 +53,6 @@ ActiveRecord::Schema.define(version: 20190618032037) do
     t.datetime "remember_created_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.boolean  "admin"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :lists
+  resources :items
   devise_for :users
   get 'home/index'
   root 'lists#index'

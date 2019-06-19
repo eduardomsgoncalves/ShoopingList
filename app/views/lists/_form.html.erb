@@ -1,12 +1,27 @@
 
 <%= simple_form_for(@list) do |f| %>
-  <%= f.error_notification %>
+<% if @list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@list.errors.count, "error") %> prohibited this list from being saved:</h2>
+
+      <ul>
+      <% @list.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <div class="form-inputs">
-    <%= f.input :product %>
-    <%= f.input :quantity %>
+    <%= f.input :list %>
+    <%= f.input :date %>
     <%= f.input :bought %>
   </div>
+
+   <%= f.fields_for :list_has_items do |builder| %>
+    <%= render "list_has_item_fields", f: builder %>
+  <% end %>
+  <p><%= link_to_add_fields t("Add Item"), f, :list_has_items %></p>
 
   <div class="form-actions">
     <%= f.button :submit %>

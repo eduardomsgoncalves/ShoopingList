@@ -9,17 +9,12 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <%= link_to t('contacts'), root_path, class: 'navbar-brand' %>
-    <div class="collapse navbar-collapse">
-      <div class="navbar-nav">
-        <%= link_to 'Any link', '#', class: 'nav-item nav-link' %>
-      </div>
-    </div>
     <% if user_signed_in? %>
-     <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'nav-item nav-link') %>
-   <% end %>
-
-  </nav>
+      <%= link_to t('Lists'), lists_path, class: 'nav-item nav-link' %>
+      <%= link_to t('Items'), items_path, class: 'nav-item nav-link' %>
+      <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'nav-item nav-link') %>
+    <% end %>
+</nav>
 
   <main class="container" role="main">
   <% flash.each do |key, value| %>

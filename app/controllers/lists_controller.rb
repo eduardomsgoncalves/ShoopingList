@@ -1,10 +1,13 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_user
+  
   # GET /lists
   # GET /lists.json
   def index
-    @contacts = Contact.paginate(page: params[:page], per_page: 5)
+    # @list = List.all
+    @list = List.where(user_id: @user.id).all
+    @lists = @list.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /lists/1
@@ -15,6 +18,7 @@ class ListsController < ApplicationController
   # GET /lists/new
   def new
     @list = List.new
+    1.times {@list.list_has_items.build}
   end
 
   # GET /lists/1/edit
@@ -24,11 +28,11 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @list = List.new(list_params)
+    @list = @user.lists.new(list_params)
 
     respond_to do |format|
       if @list.save
-        format.html { redirect_to @list, notice: 'List was successfully created.' }
+        format.html { redirect_to lists_path(@user, @list), notice: 'Lista Criada com Sucesso!' }
         format.json { render :show, status: :created, location: @list }
       else
         format.html { render :new }
@@ -42,7 +46,7 @@ class ListsController < ApplicationController
   def update
     respond_to do |format|
       if @list.update(list_params)
-        format.html { redirect_to @list, notice: 'List was successfully updated.' }
+        format.html { redirect_to @list, notice: 'Lista Atualizada com Sucesso!' }
         format.json { render :show, status: :ok, location: @list }
       else
         format.html { render :edit }
@@ -56,7 +60,7 @@ class ListsController < ApplicationController
   def destroy
     @list.destroy
     respond_to do |format|
-      format.html { redirect_to lists_url, notice: 'List was successfully destroyed.' }
+      format.html { redirect_to lists_url, notice: 'Lista Apagada com Sucesso!' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +73,11 @@ class ListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:product, :quantity, :bought)
+      params.require(:list).permit(:list, :date, :bought, list_has_items_attributes: [:item_id, :quantity, :bought, :_destroy, :id])
     end
+
+    def set_user
+      @user = User.find(current_user)
+    end
+    
 end

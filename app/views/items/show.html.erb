@@ -1,0 +1,16 @@
+<% if notice %>
+  <p id="notice" class="alert alert-success"><%= notice %></p>
+<% end %>
+
+<h1><%= t('listing items', name: t('list.title', count: 1)) %></h1>
+
+<table class="table table-striped table-hover">
+
+ <tr>
+   <th scope="row"><%= t('item.name') %>:</th>
+   <td><%= @item.name %></td>
+ </tr>
+</table>
+
+<%= link_to t('edit'), edit_list_path(@item), class: 'btn btn-primary', role: :button %>
+<%= link_to t('index'), lists_path, class: 'btn btn-outline-secondary', role: :button %>

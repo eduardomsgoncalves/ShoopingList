@@ -1,0 +1,17 @@
+<div class="form-row">
+    <div class="col">
+        <%= f.label :item_id, t("Item") %>
+        <%= f.select :item_id, options_for_select(Item.all.collect { |item| [item.name, item.id] }), :prompt => t('Select') %>
+    </div>
+    <div class="col">
+        <%= f.label :quantity, t("Quantidade") %>
+        <%= f.number_field :quantity %>
+    </div>
+    <div class="col">
+        <%= f.label :bought, t("Comprado") %>
+        <%= f.check_box :bought %>
+    </div>
+    <div class="col">
+        <%= link_to_remove_fields "x", f %>
+    </div>
+</div>
